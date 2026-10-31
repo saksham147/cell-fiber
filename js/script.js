@@ -37,7 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- Header shadow, back-to-top, active nav link ---------- */
   const sections = [...document.querySelectorAll("main section[id]")];
-  const navLinks = [...document.querySelectorAll(".nav__link")];
+  // only in-page links (#…) are highlighted on scroll; links to other pages keep their own "active" class
+  const navLinks = [...document.querySelectorAll(".nav__link")].filter((l) => l.getAttribute("href").startsWith("#"));
 
   const onScroll = () => {
     const y = window.scrollY;
@@ -122,6 +123,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const charCount = document.getElementById("charCount");
   const status = document.getElementById("formStatus");
   const submitBtn = document.getElementById("submitBtn");
+
+  if (!form) return; // page without the contact form (e.g. a product page)
+
+  // pre-select the product when coming from a product page (?product=…)
+  const wanted = new URLSearchParams(location.search).get("product");
+  const productSelect = document.getElementById("product");
+  if (wanted && [...productSelect.options].some((o) => o.value === wanted)) productSelect.value = wanted;
 
   message.addEventListener("input", () => { charCount.textContent = message.value.length; });
 
