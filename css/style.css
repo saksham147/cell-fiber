@@ -315,7 +315,16 @@ textarea { resize: vertical; }
 .breadcrumb a { color: var(--pistachio); text-decoration: none; font-weight: 600; }
 .breadcrumb a:hover { text-decoration: underline; }
 .page-hero__title { font-size: clamp(2.4rem, 6vw, 4.4rem); color: var(--brown); }
-.page-hero__lead { font-size: 1.1rem; max-width: 640px; margin: 0 0 32px; }
+.page-hero__lead {
+  max-width: 760px;
+  margin: 18px 0 0;
+  padding: 4px 0 4px 22px;
+  border-left: 3px solid var(--pistachio);
+  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+  line-height: 1.75;
+  color: var(--text);
+}
+.page-hero:has(.page-hero__lead) { padding-bottom: 48px; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 10px; }
 .chip {
@@ -350,6 +359,25 @@ textarea { resize: vertical; }
 .range__item:has(.subgrades) .range__media { position: sticky; top: calc(var(--header-h) + 20px); }
 .subgrades { margin: 8px 0 10px; border-top: 1px solid var(--line); max-width: 560px; }
 .subgrade { border-bottom: 1px solid var(--line); }
+/* Accordion on its own (no big image beside it), e.g. Printing Paper */
+.range__list { padding: 0 0 20px; }
+.range__list .subgrades { max-width: none; margin: 0; }
+.range__list .subgrade summary { padding: 22px 4px; font-size: clamp(1.05rem, 2vw, 1.25rem); }
+.range__list .subgrade summary::after { width: 34px; height: 34px; }
+.range__list .subgrade__body { grid-template-columns: 300px minmax(0, 640px); gap: 36px; align-items: center; padding: 4px 4px 28px; }
+.range__list .subgrade__img { border-radius: 12px; }
+.range__list .subgrade__text p { margin-bottom: 12px; }
+.range__list > .btn { margin-top: 28px; }
+/* Plain grade names divided by lines (Pulp, Waste Paper) */
+.grade-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.grade-list li {
+  display: flex; align-items: center; gap: 14px;
+  padding: 22px 4px;
+  border-bottom: 1px solid var(--line);
+  font-weight: 700; color: var(--ink);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+.grade-list li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--pistachio); flex-shrink: 0; }
 .subgrade summary {
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
   padding: 16px 4px;
@@ -534,7 +562,9 @@ textarea { resize: vertical; }
   .category { padding: 64px 0; }
   .cta-band { margin-top: 64px; }
   .range__item { gap: 22px; padding: 40px 0; }
-  .subgrade__body { grid-template-columns: 1fr; gap: 14px; }
+  .subgrade__body, .range__list .subgrade__body { grid-template-columns: 1fr; gap: 14px; }
+  .range__list .subgrade summary { padding: 18px 4px; }
+  .range__list .subgrade__body { padding: 0 4px 22px; }
   .subgrade__img { aspect-ratio: 16 / 9; }
   .cta-band__inner { padding: 32px 22px; }
 }
